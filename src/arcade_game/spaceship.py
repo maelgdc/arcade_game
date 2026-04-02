@@ -60,16 +60,16 @@ class Spaceship :
         """déplacement avec les touches de directions"""
         if pyxel.btn(pyxel.KEY_RIGHT):
             if self.x + self.w < self.jeu.w :
-                self.x += 1
+                self.x += 8
         if pyxel.btn(pyxel.KEY_LEFT):
             if self.x > 0:
-                self.x += -1
+                self.x += -8
         if pyxel.btn(pyxel.KEY_DOWN):
             if self.y + self.h < self.jeu.h :
-                self.y += 1
+                self.y += 8
         if pyxel.btn(pyxel.KEY_UP):
             if self.y >0: 
-                self.y += -1
+                self.y += -8
 
     def _shoot(self):
         if pyxel.btn(pyxel.KEY_SPACE):
@@ -118,4 +118,4 @@ class Shoot :
         pyxel.blt(self.x, self.y, 0, 10, 1, self.w, self.h)
 
     def _move(self):
-        self.y+=-1
+        self.y+=-8

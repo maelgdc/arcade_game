@@ -60,6 +60,11 @@ class Game:
         
         for tir in self.spaceship.shoots:
           tir.update()
+        print('Les tirs sont:')
+        for shoot in self.spaceship.shoots:
+            print(shoot)
+            
+        self.update_shoots()
           
 
     # =====================================================
@@ -75,6 +80,13 @@ class Game:
         
         for tir in self.spaceship.shoots:
           tir.draw()
+          
+    def update_shoots(self):
+      visible_shoots=[]
+      for tir in self.spaceship.shoots:
+          if (tir.y+tir.h>0):
+            visible_shoots.append(tir)
+      self.spaceship.shoots=visible_shoots
 
 # instanciation de notre classe
 Game()
