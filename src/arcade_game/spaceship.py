@@ -45,6 +45,7 @@ class Spaceship :
         # largeur (width) et hauteur du vaisseau (height)
         self.w = 8
         self.h = 8
+        self.shoots=[]
 
     # =====================================================
     # == UPDATE
@@ -53,6 +54,7 @@ class Spaceship :
         """Mise à jour du vaisseau (30FPS)
         """
         self._move()
+        self._shoot()
 
     def _move(self):
         """déplacement avec les touches de directions"""
@@ -69,6 +71,12 @@ class Spaceship :
             if self.y >0: 
                 self.y += -1
 
+    def _shoot(self):
+        if pyxel.btn(pyxel.KEY_SPACE):
+            self.shoot = Shoot(self, self.x, self.y) #instanciation du tir
+            self.shoots.append(self.shoot)
+
+
     # =====================================================
     # == DRAW
     # =====================================================
@@ -78,3 +86,36 @@ class Spaceship :
         """
         # vaisseau (carre 8x8)
         pyxel.blt(self.x, self.y, 0, 0, 0, 8, 8)
+
+
+class Shoot :
+    """
+    Une classe pour notre tir
+    """
+    def __init__(self, spaceship, x, y):
+        """Initialisation du tir
+
+        :param x: L'abscisse du coin supérieur gauche
+        :type x: int
+        :param y: L'ordonnée du coin supérieur gauche
+        :type y: int
+        """
+        self.spaceship = spaceship        
+        # largeur (width) et hauteur du tir (height)
+        self.w = 4
+        self.h = 6
+        # position initiale du tir
+        self.x = x + self.spaceship.w/2 - self.w/2
+        self.y = y
+        
+        
+    def update(self):
+        """Mise à jour du tir (30FPS)
+        """
+        self._move()
+        
+    def draw(self):
+        pyxel.blt(self.x, self.y, 0, 10, 1, self.w, self.h)
+
+    def _move(self):
+        self.y+=-1

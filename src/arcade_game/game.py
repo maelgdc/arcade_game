@@ -57,6 +57,10 @@ class Game:
 
         # deplacement du vaisseau
         self.spaceship.update()
+        
+        for tir in self.spaceship.shoots:
+          tir.update()
+          
 
     # =====================================================
     # == DRAW (30FPS)
@@ -68,6 +72,9 @@ class Game:
         pyxel.cls(0)
 
         self.spaceship.draw()
+        
+        for tir in self.spaceship.shoots:
+          tir.draw()
 
 # instanciation de notre classe
 Game()
