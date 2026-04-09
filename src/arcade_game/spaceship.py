@@ -46,6 +46,7 @@ class Spaceship :
         self.w = 8
         self.h = 8
         self.shoots=[]
+        self._last_shoot=0
 
     # =====================================================
     # == UPDATE
@@ -73,8 +74,10 @@ class Spaceship :
 
     def _shoot(self):
         if pyxel.btn(pyxel.KEY_SPACE):
-            self.shoot = Shoot(self, self.x, self.y) #instanciation du tir
-            self.shoots.append(self.shoot)
+            if pyxel.frame_count>self._last_shoot + 15:
+                self.shoot = Shoot(self, self.x, self.y) #instanciation du tir
+                self.shoots.append(self.shoot)
+                self._last_shoot=pyxel.frame_count
 
 
     # =====================================================
