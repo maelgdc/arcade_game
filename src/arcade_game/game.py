@@ -76,6 +76,7 @@ class Game:
                 
         self.update_enemies()
           
+        self.collision_shoots_enemies()
 
     # =====================================================
     # == DRAW (30FPS)
@@ -107,6 +108,31 @@ class Game:
           if enemie.y + enemie.h < enemie.jeu.h :
             visible_enemies.append(enemie)
       self.enemies=visible_enemies
+      
+    def is_collision(self, obj1, obj2):
+      """
+      obj1 : une instance d'un objet
+      obj2 : une instance d'un objet
+      
+      retourne True si il y a collision entre les deux objets, False sinon
+      """
+      if max(obj1.x, obj2.x)<=min(obj1.x+obj1.w, obj2.x+obj2.w) and max(obj1.y, obj2.y)<=min(obj1.y+obj1.h, obj2.y+obj2.h):
+        print("col")
+        return True
+      else : return False
+    
+    def collision_shoots_enemies(self):
+      tirs_a_supprimer =[]
+      ennemis_a_supprimer =[]
+      for tir in self.spaceship.shoots:
+        for enemy in self.enemies:
+          if self.is_collision(tir,enemy):
+            tirs_a_supprimer.append(tir)
+            ennemis_a_supprimer.append(enemy)
+      for enemy_a_supprimer in ennemis_a_supprimer:
+        self.enemies.remove(enemy_a_supprimer)
+      for tir_a_supprimer in tirs_a_supprimer:
+        self.spaceship.shoots.remove(tir_a_supprimer)
 
 # instanciation de notre classe
 Game()

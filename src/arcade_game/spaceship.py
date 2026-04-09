@@ -121,4 +121,4 @@ class Shoot :
         pyxel.blt(self.x, self.y, 0, 10, 1, self.w, self.h)
 
     def _move(self):
-        self.y+=-8
+        self.y-=1

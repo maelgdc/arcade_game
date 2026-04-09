@@ -27,7 +27,14 @@ class Enemy :
         """
         Dessin d'un ennemi
         """
-        pyxel.blt(self.x, self.y, 0, 0, 8, 8, 8)
+        nb_frame=pyxel.frame_count
+        if nb_frame%15<5:
+            pyxel.blt(self.x, self.y, 0, 0, 8, 8, 8)
+        elif nb_frame%15<10:
+            pyxel.blt(self.x, self.y, 0, 0, 16, 8, 8)
+        else :
+            pyxel.blt(self.x, self.y, 0, 0, 24, 8, 8)
+        
     
     # =====================================================
     # == UPDATE
@@ -35,4 +42,4 @@ class Enemy :
     def update(self):
         """Mise à jour de l'ennemie (30FPS)
         """
-        self.y+=2
+        self.y+=1
