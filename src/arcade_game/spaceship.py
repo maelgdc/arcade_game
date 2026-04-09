@@ -47,6 +47,8 @@ class Spaceship :
         self.h = 8
         self.shoots=[]
         self._last_shoot=0
+        self.lives=4
+        
 
     # =====================================================
     # == UPDATE

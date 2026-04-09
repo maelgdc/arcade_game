@@ -77,6 +77,11 @@ class Game:
         self.update_enemies()
           
         self.collision_shoots_enemies()
+        
+        for enemy in self.enemies:
+          if self.is_collision(self.spaceship,enemy):
+            self.spaceship.lives-=1
+            self.enemies.remove(enemy)
 
     # =====================================================
     # == DRAW (30FPS)
@@ -86,14 +91,25 @@ class Game:
 
         # vide la fenetre 30 fois par seconde
         pyxel.cls(0)
+        if self.spaceship.lives > 0:
 
-        self.spaceship.draw()
-        
-        for tir in self.spaceship.shoots:
-          tir.draw()
+          # affichage des vies            
+          pyxel.text(5,5, 'VIES:'+ str(self.spaceship.lives), 7)
+
+          # LE RESTE DE VOTRE CODE
+          self.spaceship.draw()
           
-        for enemy in self.enemies:
-          enemy.draw()
+          for tir in self.spaceship.shoots:
+            tir.draw()
+            
+          for enemy in self.enemies:
+            enemy.draw()
+
+        # sinon: GAME OVER
+        else:
+          pyxel.text(50,64, 'GAME OVER', 7)
+
+        
           
     def update_shoots(self):
       visible_shoots=[]
